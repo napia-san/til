@@ -1,4 +1,4 @@
-# [SQL]Data processing
+# [SQL]Data processing[Oct.16.2022]
 以下のテーブルに対するクエリを例示する<br>
 [Table] users
 | id | class | level | name | age | sex | last_update |
