@@ -1,4 +1,4 @@
-# [SQL]Basic grramer of SQL[Oct.16.2022]
+# [SQL]Basic gramer of SQL[Oct.16.2022]
 
 ## テーブル各部名称
 [usersテーブル]
