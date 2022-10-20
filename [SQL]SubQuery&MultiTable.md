@@ -40,5 +40,14 @@ WHERE score > (
 
 ## Responseの可読性向上
 `AS`:カラム名の書き換え<br>
+さまざまな条件で絞り込んだとき，カラム名がデフォルトのままだと，何が何だかわからなくなる．わかりやすくするためにカラム名を書き換えて出力することがある．
 
-[Sample3] 
+[Sample3] `score`が平均以上の人のidを表示する．
+```
+SELECT id AS "平均点を超えた人のid"
+FROM players
+WHERE score > (
+  SELECT AVG(score)
+  FROM players
+);
+```
