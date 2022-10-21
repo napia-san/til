@@ -51,3 +51,70 @@ WHERE score > (
   FROM players
 );
 ```
+<br>
+
+## テーブル同士の結合
+テーブルが2つあるとする．
+[Table1] players
+| id | name | score | age | ex_class_id |
+| :-: | :-: | :-: | :-: | :-: |
+| 1 | Andy | 190 | 23 | 1 |
+| 2 | Buzz | 890 | 38 | 3 |
+| 3 | Duffy | 140 | 4 |   |
+| 4 | Daisy | 280 | 28 |   |
+| 5 | Belle | 630 | 34 | 1 |
+| 6 | Chris | 390 | 10 | 2 |
+| 7 | Ben | 870 | 25 |   |
+| 8 | Mike | 500 | 31 | 2 |
+<br>
+
+[Table2] classes
+| id | name |
+| :-: | :-: |
+| 1 | A |
+| 2 | B |
+| 3 | C |
+<br>
+
+テーブルを分けておけば，変更が生じたときの手間が省ける．<br>
+`players`の`ex_class_id`カラムの値は，`classes`の`id`と関連付けされている．
+このとき，前者を`外部キー`，後者を`主キー`と呼ぶ．<br>
+
+[Sample4] 二つのテーブルを結合して出力
+```
+SELECT *
+FROM players
+JOIN classes
+ON players.ex_class_id = classes.id;
+```
+[Response]
+| id | name | score | age | ex_class_id | id | name |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| 1 | Andy | 190 | 23 | 1 | 1 | A |
+| 2 | Buzz | 890 | 38 | 3 | 3 | C |
+| 5 | Belle | 630 | 34 | 1 | 1 | A |
+| 6 | Chris | 390 | 10 | 2 | 2 | B |
+| 8 | Mike | 500 | 31 | 2 | 2 | B |
+<br>
+
+このように`ex_class_id`が`NULL`となっているレコードは除外して出力される．<br>
+[Sample5] `NULL`でも出力させる(`LEFT JOIN`を使う)
+```
+SELECT *
+FROM players
+LEFT JOIN classes
+ON players.ex_class_id = classes.id;
+```
+[Response]
+| id | name | score | age | ex_class_id | id | name |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| 1 | Andy | 190 | 23 | 1 | 1 | A |
+| 2 | Buzz | 890 | 38 | 3 | 3 | C |
+| 3 | Duffy | 140 | 4 |   |   |   |
+| 4 | Daisy | 280 | 28 |   |   |   |
+| 5 | Belle | 630 | 34 | 1 | 1 | A |
+| 6 | Chris | 390 | 10 | 2 | 2 | B |
+| 7 | Ben | 870 | 25 |   |   |   |
+| 8 | Mike | 500 | 31 | 2 | 2 | B |
+<br>
+
