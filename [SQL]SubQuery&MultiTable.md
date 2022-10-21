@@ -54,7 +54,7 @@ WHERE score > (
 <br>
 
 ## テーブル同士の結合
-テーブルが2つあるとする．
+テーブルが2つあるとする．<br>
 [Table1] players
 | id | name | score | age | ex_class_id |
 | :-: | :-: | :-: | :-: | :-: |
